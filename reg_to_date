@@ -1,0 +1,73 @@
+<?php $on1 = date("Y");
+$rd = 'мз13262820';
+if (!preg_match("/^[[а-яА-ЯөүӨҮёЁ]{4}[0-9]{8}]*$/",$rd)) {
+    $aldaa = 1;
+} else {
+    $names = $rd;
+
+    $on = substr($names, 4,2);
+    $on2 = substr($on1, 2,2);
+    if($on > $on2) {
+        $sar = substr($names, 6,2);
+        if ($sar >= 1 && $sar <= 12) {
+        
+        $odor = substr($names, 8,2);
+        if ($odor >= 1 && $odor <= 31) {
+
+        $ugtvar = '19';  
+            
+            $huis = substr($names, 10,1);
+        if ($huis % 2 == 0) {
+            $huis1 = 'эмэгтэй';
+        } else {
+            $huis1 = 'эрэгтэй';
+        }
+
+        } else {
+            $aldaa = 1;
+        }
+
+        } else {
+            $aldaa = 1;
+        }
+    } else {
+            $sar = (substr($names, 6,2))-20;
+        if ($sar >= 1 && $sar <= 12) {
+        
+        $odor = substr($names, 8,2);
+        if ($odor >= 1 && $odor <= 31) {
+
+        $ugtvar = '20';  
+            
+            $huis = substr($names, 10,1);
+        if ($huis % 2 == 0) {
+            $huis1 = 'эмэгтэй';
+        } else {
+            $huis1 = 'эрэгтэй';
+        }
+
+        } else {
+            $aldaa = 1;
+        }
+
+        } else {
+            $aldaa = 1;
+        }
+    }
+    echo '</br>';
+    if(isset($aldaa)) {
+        echo 'Таны регистр алдаатай байна';
+    } else {
+    $birthDate = $sar.'/'.$odor.'/'.$ugtvar.$on;
+    //explode the date to get month, day and year
+    $birthDate = explode("/", $birthDate);
+    //get age from date or birthdate
+    $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+        ? ((date("Y") - $birthDate[2]) - 1)
+        : (date("Y") - $birthDate[2]));
+        echo $ugtvar.$on.' оны '.$sar.' сарын '.$odor.' төрсөн. Хүйс: '.$huis1.'. Нас: '.$age.'';
+    }
+
+
+
+} ?>
